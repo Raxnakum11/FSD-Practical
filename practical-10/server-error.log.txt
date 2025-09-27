@@ -1,0 +1,5 @@
+[2025-09-12 10:15:23] ERROR: Database connection failed: timeout
+[2025-09-12 10:16:01] WARN: User login attempt failed for user 'admin'
+[2025-09-12 10:17:45] INFO: Scheduled backup completed successfully
+[2025-09-12 10:18:12] ERROR: Unhandled exception in /api/data: TypeError: Cannot read property 'id' of undefined
+[2025-09-12 10:19:30] INFO: Server started on port 3000

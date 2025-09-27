@@ -1,0 +1,120 @@
+/* Minimal, professional To-Do List styles */
+:root {
+  --color-primary: #6f42c1;
+  --color-bg: #1a1333;
+  --color-card: #2d2050;
+  --color-input: #251a3a;
+  --color-btn: #7c4dff;
+  --color-btn-hover: #5f36b7;
+  --color-text: #fff;
+  --color-accent: #b39ddb;
+  --color-border: #3d2e5a;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.todo-app {
+  max-width: 400px;
+  margin: 48px auto;
+  background: var(--color-card);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: var(--color-text);
+  letter-spacing: 1px;
+}
+
+.todo-input-row {
+  display: flex;
+  width: 100%;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--color-input);
+  color: var(--color-text);
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+.todo-input:focus {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.todo-add-btn {
+  background: var(--color-btn);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  height: 40px;
+}
+.todo-add-btn:hover {
+  background: var(--color-btn-hover);
+  transform: translateY(-1px);
+}
+
+.todo-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.todo-task {
+  background: var(--color-input);
+  border-radius: 8px;
+  padding: 16px 16px 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.icon-btn:not(:disabled):hover {
+  background: var(--color-border);
+}
