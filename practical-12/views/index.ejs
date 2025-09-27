@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= title %></h1>
+      <p class="subtitle">Enter two numbers and pick an operation!</p>
+
+      <div class="calculator">
+        <form method="post" action="/">
+          <div class="form-group">
+            <label for="num1">First Number:</label>
+            <input
+              type="text"
+              id="num1"
+              name="num1"
+              value="<%= num1 %>"
+              placeholder="Enter first number"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="num2">Second Number:</label>
+            <input
+              type="text"
+              id="num2"
+              name="num2"
+              value="<%= num2 %>"
+              placeholder="Enter second number"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Choose Operation:</label>
+            <div class="operation-buttons">
+              <label class="operation-option">
+                <input type="radio" name="operation" value="add" <%= operation
+                === 'add' ? 'checked' : '' %>>
+                <span class="operation-btn">➕ Add</span>
+              </label>
+              <label class="operation-option">
+                <input type="radio" name="operation" value="subtract" <%=
+                operation === 'subtract' ? 'checked' : '' %>>
+                <span class="operation-btn">➖ Subtract</span>
+              </label>
+              <label class="operation-option">
+                <input type="radio" name="operation" value="multiply" <%=
+                operation === 'multiply' ? 'checked' : '' %>>
+                <span class="operation-btn">✖️ Multiply</span>
+              </label>
+              <label class="operation-option">
+                <input type="radio" name="operation" value="divide" <%=
+                operation === 'divide' ? 'checked' : '' %>>
+                <span class="operation-btn">➗ Divide</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="calculate-btn">Calculate!</button>
+        </form>
+
+        <div class="result-section">
+          <% if (error) { %>
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <%= error %>
+          </div>
+          <% } %> <% if (result !== null && !error) { %>
+          <div class="result-message">
+            <span class="result-icon">🎉</span>
+            The answer is: <strong><%= result %></strong>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Server Log</title>
+  <style>
+    body {
+      font-family: Inter, Roboto, Arial, sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      margin: 0;
+      padding: 32px;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+      padding: 32px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+    pre {
+      background: #e9ecef;
+      padding: 16px;
+      border-radius: 6px;
+      font-size: 15px;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+    .error {
+      color: #dc3545;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Server Log Viewer</h1>
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <% if (logContent) { %>
+      <pre><%= logContent %></pre>
+    <% } else if (!error) { %>
+      <div>No log content to display.</div>
+    <% } %>
+  </div>
+</body>
+</html>
