@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Portfolio - Contact Me</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-top: -30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #ee5a5a;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .contact-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🚀 Freelance Developer Portfolio</h1>
+            <p>Professional Web Development Services - Contact Me Today!</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Flash Messages -->
+            <% if (success_msg && success_msg.length > 0) { %>
+                <div class="alert alert-success">
+                    ✅ <%= success_msg %>
+                </div>
+            <% } %>
+
+            <% if (error_msg && error_msg.length > 0) { %>
+                <div class="alert alert-error">
+                    ❌ <%= error_msg %>
+                </div>
+            <% } %>
+
+            <!-- Services Section -->
+            <h2 style="text-align: center; margin-bottom: 30px; color: #333;">My Services</h2>
+            <div class="services">
+                <div class="service-card">
+                    <h3>🌐 Web Development</h3>
+                    <p>Modern, responsive websites built with the latest technologies. From simple landing pages to complex web applications.</p>
+                </div>
+                <div class="service-card">
+                    <h3>💡 E-commerce Solutions</h3>
+                    <p>Complete online store development with payment integration, inventory management, and user-friendly interfaces.</p>
+                </div>
+                <div class="service-card">
+                    <h3>📱 Mobile-First Design</h3>
+                    <p>Responsive designs that look great on all devices. Perfect user experience across desktop, tablet, and mobile.</p>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h2 style="text-align: center; margin-bottom: 30px;">📧 Get In Touch</h2>
+                <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+                    Ready to start your project? Send me a message and let's discuss your ideas!
+                </p>
+
+                <form action="/contact" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">👤 Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        <% if (errors && errors.find(err => err.path === 'name')) { %>
+                            <div class="error-message">
+                                <%= errors.find(err => err.path === 'name').msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">📧 Your Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        <% if (errors && errors.find(err => err.path === 'email')) { %>
+                            <div class="error-message">
+                                <%= errors.find(err => err.path === 'email').msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">💼 Project Type</label>
+                        <input type="text" id="subject" name="subject" placeholder="e.g., Website Development, E-commerce, Consultation">
+                        <% if (errors && errors.find(err => err.path === 'subject')) { %>
+                            <div class="error-message">
+                                <%= errors.find(err => err.path === 'subject').msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">💬 Tell me about your project *</label>
+                        <textarea id="message" name="message" required placeholder="Describe your project requirements, timeline, and any specific features you need..."></textarea>
+                        <% if (errors && errors.find(err => err.path === 'message')) { %>
+                            <div class="error-message">
+                                <%= errors.find(err => err.path === 'message').msg %>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <button type="submit" class="btn">
+                        🚀 Send Message & Get Quote
+                    </button>
+                </form>
+
+                <div style="text-align: center; margin-top: 30px; opacity: 0.8;">
+                    <p>⚡ Quick Response • 💼 Professional Service • 🎯 Quality Results</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple form validation feedback
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields!');
+                e.preventDefault();
+                return false;
+            }
+            
+            // Show loading state
+            const button = document.querySelector('.btn');
+            button.innerHTML = '⏳ Sending Message...';
+            button.disabled = true;
+        });
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.transition = 'opacity 0.5s ease';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
