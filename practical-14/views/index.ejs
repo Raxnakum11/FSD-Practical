@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal - Resume Upload</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-briefcase"></i>
+                <h1>Job Portal</h1>
+                <p>Upload your resume to apply for exciting opportunities</p>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <a href="/" class="nav-link active">
+                <i class="fas fa-upload"></i>
+                Upload Resume
+            </a>
+            <a href="/uploaded-files" class="nav-link">
+                <i class="fas fa-files-o"></i>
+                View Uploaded Files
+            </a>
+        </nav>
+
+        <main class="main-content">
+            <div class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <i class="fas fa-file-pdf"></i>
+                        <h2>Upload Your Resume</h2>
+                        <p class="upload-subtitle">Only PDF files up to 2MB are accepted</p>
+                    </div>
+
+                    <!-- Display messages -->
+                    <% if (error) { %>
+                        <div class="alert alert-error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><%= error %></span>
+                        </div>
+                    <% } %>
+
+                    <% if (message) { %>
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            <span><%= message %></span>
+                        </div>
+                    <% } %>
+
+                    <!-- Upload form -->
+                    <form action="/upload-resume" method="POST" enctype="multipart/form-data" class="upload-form">
+                        <div class="file-input-container">
+                            <input type="file" 
+                                   id="resume" 
+                                   name="resume" 
+                                   accept=".pdf,application/pdf" 
+                                   required 
+                                   class="file-input">
+                            <label for="resume" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span class="file-label-text">Choose PDF File</span>
+                                <span class="file-label-subtext">or drag and drop here</span>
+                            </label>
+                        </div>
+
+                        <div class="file-requirements">
+                            <h4>File Requirements:</h4>
+                            <ul>
+                                <li><i class="fas fa-check"></i> PDF format only</li>
+                                <li><i class="fas fa-check"></i> Maximum size: 2MB</li>
+                                <li><i class="fas fa-check"></i> Resume content preferred</li>
+                            </ul>
+                        </div>
+
+                        <button type="submit" class="upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Upload Resume
+                        </button>
+                    </form>
+                </div>
+
+                <div class="info-section">
+                    <h3>Why Upload Your Resume?</h3>
+                    <div class="benefits">
+                        <div class="benefit">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Quick Applications</h4>
+                            <p>Apply to multiple jobs faster with your uploaded resume</p>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-eye"></i>
+                            <h4>Increased Visibility</h4>
+                            <p>Get noticed by employers looking for your skills</p>
+                        </div>
+                        <div class="benefit">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Secure Storage</h4>
+                            <p>Your resume is safely stored and validated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Job Portal. Secure file upload system.</p>
+        </footer>
+    </div>
+
+    <script>
+        // File input enhancement
+        document.getElementById('resume').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const label = document.querySelector('.file-label-text');
+            
+            if (file) {
+                // Validate file type
+                if (file.type !== 'application/pdf') {
+                    alert('Please select a PDF file only.');
+                    this.value = '';
+                    label.textContent = 'Choose PDF File';
+                    return;
+                }
+                
+                // Validate file size (2MB = 2097152 bytes)
+                if (file.size > 2097152) {
+                    alert('File size must be less than 2MB.');
+                    this.value = '';
+                    label.textContent = 'Choose PDF File';
+                    return;
+                }
+                
+                label.textContent = file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)';
+            } else {
+                label.textContent = 'Choose PDF File';
+            }
+        });
+
+        // Drag and drop functionality
+        const fileInputContainer = document.querySelector('.file-input-container');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileInputContainer.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileInputContainer.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileInputContainer.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            fileInputContainer.classList.add('drag-over');
+        }
+
+        function unhighlight(e) {
+            fileInputContainer.classList.remove('drag-over');
+        }
+
+        fileInputContainer.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                document.getElementById('resume').files = files;
+                document.getElementById('resume').dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+</body>
+</html>

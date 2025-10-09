@@ -1,0 +1,22 @@
+{
+  "name": "job-portal-file-upload",
+  "version": "1.0.0",
+  "description": "Job portal with resume upload functionality - PDF files only, max 2MB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["job-portal", "file-upload", "express", "multer", "pdf"],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "ejs": "^3.1.9",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

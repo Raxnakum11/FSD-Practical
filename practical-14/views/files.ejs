@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal - Uploaded Files</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-briefcase"></i>
+                <h1>Job Portal</h1>
+                <p>Manage your uploaded resumes</p>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <a href="/" class="nav-link">
+                <i class="fas fa-upload"></i>
+                Upload Resume
+            </a>
+            <a href="/uploaded-files" class="nav-link active">
+                <i class="fas fa-files-o"></i>
+                View Uploaded Files
+            </a>
+        </nav>
+
+        <main class="main-content">
+            <div class="files-section">
+                <div class="files-header">
+                    <h2>
+                        <i class="fas fa-folder-open"></i>
+                        Uploaded Resumes
+                    </h2>
+                    <p>All uploaded PDF files are listed below</p>
+                </div>
+
+                <% if (error) { %>
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span><%= error %></span>
+                    </div>
+                <% } %>
+
+                <% if (files && files.length > 0) { %>
+                    <div class="files-grid">
+                        <% files.forEach(function(file) { %>
+                            <div class="file-card">
+                                <div class="file-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="file-info">
+                                    <h3 class="file-name"><%= file.name %></h3>
+                                    <p class="file-size">Size: <%= file.size %></p>
+                                    <p class="file-date">Uploaded: <%= file.uploadDate %></p>
+                                </div>
+                                <div class="file-actions">
+                                    <a href="/download/<%= file.name %>" class="download-btn">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </a>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <div class="files-summary">
+                        <p><strong><%= files.length %></strong> resume(s) uploaded successfully</p>
+                    </div>
+                <% } else { %>
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h3>No Files Uploaded Yet</h3>
+                        <p>Upload your first resume to get started with job applications.</p>
+                        <a href="/" class="cta-btn">
+                            <i class="fas fa-plus"></i>
+                            Upload Resume
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Job Portal. Secure file management system.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add confirmation for downloads
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const fileName = this.href.split('/').pop();
+                if (!confirm(`Download ${fileName}?`)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
