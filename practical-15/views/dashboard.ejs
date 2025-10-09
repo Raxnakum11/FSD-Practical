@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Portal - Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-book-open"></i>
+                <h1>University Library Portal</h1>
+                <p>Dashboard - Welcome, <%= user.username %></p>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <a href="/profile" class="nav-link">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+            <a href="/dashboard" class="nav-link active">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </a>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="nav-link logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </form>
+            <a href="/about" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+                About
+            </a>
+        </nav>
+
+        <main class="main-content">
+            <div class="dashboard-section">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="banner-content">
+                        <h2>Welcome back, <%= user.username %>!</h2>
+                        <p>You're logged in as a <%= user.role %> in the <%= user.department %> department.</p>
+                        <div class="session-status">
+                            <i class="fas fa-circle online-indicator"></i>
+                            Session active since <%= new Date(user.loginTime).toLocaleTimeString() %>
+                        </div>
+                    </div>
+                    <div class="banner-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Books Borrowed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1</h3>
+                            <p>Reservations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>2</h3>
+                            <p>Overdue Items</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>15</h3>
+                            <p>Points Earned</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <h3>
+                        <i class="fas fa-history"></i>
+                        Recent Activity
+                    </h3>
+                    
+                    <div class="activity-list">
+                        <% recentActivity.forEach(activity => { %>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <% if (activity.action.includes('borrowed')) { %>
+                                        <i class="fas fa-arrow-down text-blue"></i>
+                                    <% } else if (activity.action.includes('returned')) { %>
+                                        <i class="fas fa-arrow-up text-green"></i>
+                                    <% } else { %>
+                                        <i class="fas fa-bookmark text-orange"></i>
+                                    <% } %>
+                                </div>
+                                <div class="activity-details">
+                                    <p class="activity-description"><%= activity.action %>: <strong><%= activity.item %></strong></p>
+                                    <p class="activity-time"><%= activity.time %></p>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>
+                        <i class="fas fa-bolt"></i>
+                        Quick Actions
+                    </h3>
+                    
+                    <div class="actions-grid">
+                        <button class="action-card" onclick="searchBooks()">
+                            <i class="fas fa-search"></i>
+                            <span>Search Books</span>
+                        </button>
+                        
+                        <button class="action-card" onclick="viewReservations()">
+                            <i class="fas fa-bookmark"></i>
+                            <span>My Reservations</span>
+                        </button>
+                        
+                        <button class="action-card" onclick="renewBooks()">
+                            <i class="fas fa-redo"></i>
+                            <span>Renew Books</span>
+                        </button>
+                        
+                        <button class="action-card" onclick="viewHistory()">
+                            <i class="fas fa-history"></i>
+                            <span>Borrow History</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Session Info Widget -->
+                <div class="session-widget">
+                    <h3>
+                        <i class="fas fa-shield-alt"></i>
+                        Session Information
+                    </h3>
+                    
+                    <div class="session-details">
+                        <div class="session-item">
+                            <span class="label">Login Time:</span>
+                            <span class="value"><%= new Date(user.loginTime).toLocaleString() %></span>
+                        </div>
+                        <div class="session-item">
+                            <span class="label">Session ID:</span>
+                            <span class="value session-id"><%= user.sessionId %></span>
+                        </div>
+                        <div class="session-item">
+                            <span class="label">Status:</span>
+                            <span class="value status-active">
+                                <i class="fas fa-circle"></i>
+                                Active
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="session-actions">
+                        <a href="/profile" class="btn-link">
+                            <i class="fas fa-eye"></i>
+                            View Full Session Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 University Library Portal. Dashboard view with session tracking.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Mock function implementations for quick actions
+        function searchBooks() {
+            alert('Search Books feature - This would open the book search interface');
+        }
+        
+        function viewReservations() {
+            alert('My Reservations - This would show your book reservations');
+        }
+        
+        function renewBooks() {
+            alert('Renew Books - This would show books available for renewal');
+        }
+        
+        function viewHistory() {
+            alert('Borrow History - This would display your borrowing history');
+        }
+
+        // Update session duration in real-time
+        function updateSessionTime() {
+            const loginTime = new Date('<%= user.loginTime %>');
+            const now = new Date();
+            const diffMs = now - loginTime;
+            
+            const hours = Math.floor(diffMs / (1000 * 60 * 60));
+            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            let duration;
+            if (hours > 0) {
+                duration = `${hours}h ${minutes}m`;
+            } else {
+                duration = `${minutes}m`;
+            }
+            
+            // Update session status text
+            const sessionStatus = document.querySelector('.session-status');
+            if (sessionStatus) {
+                sessionStatus.innerHTML = `
+                    <i class="fas fa-circle online-indicator"></i>
+                    Session active for ${duration} (since ${loginTime.toLocaleTimeString()})
+                `;
+            }
+        }
+
+        // Update every minute
+        setInterval(updateSessionTime, 60000);
+        
+        // Initial update
+        updateSessionTime();
+    </script>
+</body>
+</html>

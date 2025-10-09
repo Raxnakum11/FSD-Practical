@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Portal - About</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-book-open"></i>
+                <h1>University Library Portal</h1>
+                <p>About the session management system</p>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <% if (user) { %>
+                <a href="/profile" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="/dashboard" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="nav-link logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            <% } else { %>
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+            <% } %>
+            <a href="/about" class="nav-link active">
+                <i class="fas fa-info-circle"></i>
+                About
+            </a>
+        </nav>
+
+        <main class="main-content">
+            <div class="about-section">
+                <div class="about-card">
+                    <h2>
+                        <i class="fas fa-university"></i>
+                        About Library Portal
+                    </h2>
+                    
+                    <p>The University Library Portal is a demonstration of session management in web applications. This system showcases how user sessions are created, tracked, and destroyed in a secure manner.</p>
+
+                    <div class="features-list">
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><i class="fas fa-user-shield"></i> <strong>Secure Authentication:</strong> Password-based login with bcrypt encryption</li>
+                            <li><i class="fas fa-clock"></i> <strong>Session Tracking:</strong> Real-time monitoring of user sessions</li>
+                            <li><i class="fas fa-fingerprint"></i> <strong>Session ID:</strong> Unique session identifiers for each login</li>
+                            <li><i class="fas fa-stopwatch"></i> <strong>Duration Tracking:</strong> Live session duration calculation</li>
+                            <li><i class="fas fa-sign-out-alt"></i> <strong>Secure Logout:</strong> Proper session destruction and cleanup</li>
+                            <li><i class="fas fa-shield-alt"></i> <strong>Session Security:</strong> HTTP-only cookies and secure configuration</li>
+                        </ul>
+                    </div>
+
+                    <div class="technical-details">
+                        <h3>Technical Implementation</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fab fa-node-js"></i>
+                                <div>
+                                    <strong>Node.js & Express</strong>
+                                    <p>Backend server with Express framework</p>
+                                </div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-cookie"></i>
+                                <div>
+                                    <strong>Express Session</strong>
+                                    <p>Session middleware for user state management</p>
+                                </div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-lock"></i>
+                                <div>
+                                    <strong>bcrypt</strong>
+                                    <p>Password hashing and verification</p>
+                                </div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-code"></i>
+                                <div>
+                                    <strong>EJS Templates</strong>
+                                    <p>Dynamic HTML rendering with embedded JavaScript</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="session-info">
+                        <h3>Session Management</h3>
+                        <p>This application demonstrates several important concepts in web session management:</p>
+                        
+                        <div class="concept-grid">
+                            <div class="concept">
+                                <h4><i class="fas fa-play-circle"></i> Session Creation</h4>
+                                <p>When users log in, a new session is created with their information and a unique session ID.</p>
+                            </div>
+                            <div class="concept">
+                                <h4><i class="fas fa-database"></i> Session Storage</h4>
+                                <p>Session data includes user details, login time, and security information stored server-side.</p>
+                            </div>
+                            <div class="concept">
+                                <h4><i class="fas fa-eye"></i> Session Tracking</h4>
+                                <p>Users can view their session information including duration, expiry, and activity.</p>
+                            </div>
+                            <div class="concept">
+                                <h4><i class="fas fa-trash"></i> Session Destruction</h4>
+                                <p>Logout properly destroys the session and clears all associated data.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="security-features">
+                        <h3>Security Features</h3>
+                        <div class="security-list">
+                            <div class="security-item">
+                                <i class="fas fa-shield-alt text-green"></i>
+                                <div>
+                                    <strong>HTTP-Only Cookies</strong>
+                                    <p>Session cookies are not accessible via JavaScript</p>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-clock text-orange"></i>
+                                <div>
+                                    <strong>Session Expiry</strong>
+                                    <p>Sessions automatically expire after 24 hours</p>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-key text-blue"></i>
+                                <div>
+                                    <strong>Secret Key</strong>
+                                    <p>Sessions are signed with a secret key</p>
+                                </div>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-user-lock text-purple"></i>
+                                <div>
+                                    <strong>Password Encryption</strong>
+                                    <p>Passwords are hashed using bcrypt</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% if (user) { %>
+                        <div class="current-session">
+                            <h3>Your Current Session</h3>
+                            <div class="session-summary">
+                                <p><strong>User:</strong> <%= user.username %> (<%= user.role %>)</p>
+                                <p><strong>Login Time:</strong> <%= new Date(user.loginTime).toLocaleString() %></p>
+                                <p><strong>Session ID:</strong> <code><%= user.sessionId %></code></p>
+                                <a href="/profile" class="btn-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    View Full Session Details
+                                </a>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 University Library Portal. Educational session management demonstration.</p>
+        </footer>
+    </div>
+</body>
+</html>

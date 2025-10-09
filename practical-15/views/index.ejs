@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Portal - Welcome</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <i class="fas fa-book-open"></i>
+                <h1>University Library Portal</h1>
+                <p>Your gateway to knowledge and learning resources</p>
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <a href="/" class="nav-link active">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+            <% if (user) { %>
+                <a href="/profile" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="/dashboard" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="nav-link logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </form>
+            <% } else { %>
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+            <% } %>
+            <a href="/about" class="nav-link">
+                <i class="fas fa-info-circle"></i>
+                About
+            </a>
+        </nav>
+
+        <!-- Flash Messages -->
+        <% if (success_msg && success_msg.length > 0) { %>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span><%= success_msg %></span>
+            </div>
+        <% } %>
+
+        <% if (error_msg && error_msg.length > 0) { %>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span><%= error_msg %></span>
+            </div>
+        <% } %>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <div class="welcome-card">
+                    <div class="welcome-header">
+                        <i class="fas fa-university"></i>
+                        <h2>Welcome to the Library Portal</h2>
+                        <p class="welcome-subtitle">Access your library account and manage your academic resources</p>
+                    </div>
+
+                    <% if (user) { %>
+                        <!-- Logged in user welcome -->
+                        <div class="user-welcome">
+                            <div class="user-info">
+                                <h3>Hello, <%= user.username %>!</h3>
+                                <p>Welcome back to the library portal. You're logged in as a <%= user.role %>.</p>
+                                <div class="quick-actions">
+                                    <a href="/profile" class="action-btn primary">
+                                        <i class="fas fa-user"></i>
+                                        View Profile
+                                    </a>
+                                    <a href="/dashboard" class="action-btn secondary">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <!-- Guest user welcome -->
+                        <div class="guest-welcome">
+                            <p>Please log in to access your library account and manage your borrowed books, reservations, and academic resources.</p>
+                            
+                            <div class="login-prompt">
+                                <a href="/login" class="action-btn primary large">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    Login to Your Account
+                                </a>
+                            </div>
+
+                            <div class="demo-info">
+                                <h4>Demo Accounts:</h4>
+                                <div class="demo-accounts">
+                                    <div class="demo-account">
+                                        <strong>Librarian:</strong> librarian / password123
+                                    </div>
+                                    <div class="demo-account">
+                                        <strong>Student:</strong> student1 / password123
+                                    </div>
+                                    <div class="demo-account">
+                                        <strong>Faculty:</strong> faculty1 / password123
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+
+                <div class="features-section">
+                    <h3>Library Portal Features</h3>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <h4>Book Management</h4>
+                            <p>Search, borrow, and return books with ease</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <h4>Session Tracking</h4>
+                            <p>Monitor your login sessions and activity</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bookmark"></i>
+                            <h4>Reservations</h4>
+                            <p>Reserve books and manage your reading list</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Secure Access</h4>
+                            <p>Protected with secure session management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 University Library Portal. Secure session management system.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Auto-hide flash messages after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
