@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><%= title %></h1>
+            <p class="subtitle">Your income calculation has been completed</p>
+        </header>
+
+        <main>
+            <div class="result-container">
+                <div class="result-summary">
+                    <h2>Income Summary</h2>
+                    
+                    <div class="income-breakdown">
+                        <div class="income-item">
+                            <span class="label">Income Source 1:</span>
+                            <span class="amount">$<%= income1.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+                        </div>
+                        
+                        <div class="income-item">
+                            <span class="label">Income Source 2:</span>
+                            <span class="amount">$<%= income2.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <div class="income-item total">
+                            <span class="label">Total Income:</span>
+                            <span class="amount">$<%= totalIncome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <a href="/" class="btn btn-primary">Calculate Again</a>
+                    <button onclick="window.print()" class="btn btn-secondary">Print Results</button>
+                </div>
+
+                <div class="disclaimer">
+                    <h3>Important Disclaimer</h3>
+                    <p>This calculation is for educational purposes only. Please consult with a qualified tax professional for actual tax preparation and advice. This tool does not account for deductions, credits, or other tax considerations.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Tax Income Calculator - For educational purposes only</p>
+        </footer>
+    </div>
+</body>
+</html>

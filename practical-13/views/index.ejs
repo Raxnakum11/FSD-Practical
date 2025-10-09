@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><%= title %></h1>
+            <p class="subtitle">Enter your income from two sources to calculate your total income</p>
+        </header>
+
+        <main>
+            <!-- Display errors if any -->
+            <% if (errors && errors.length > 0) { %>
+                <div class="error-container">
+                    <h3>Please correct the following errors:</h3>
+                    <ul class="error-list">
+                        <% errors.forEach(error => { %>
+                            <li><%= error %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            <% } %>
+
+            <form action="/calculate" method="POST" class="tax-form">
+                <div class="form-group">
+                    <label for="income1">Income Source 1 ($):</label>
+                    <input 
+                        type="number" 
+                        id="income1" 
+                        name="income1" 
+                        value="<%= formData.income1 %>"
+                        placeholder="Enter income from first source"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+                    <small class="help-text">e.g., Salary, wages, tips</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="income2">Income Source 2 ($):</label>
+                    <input 
+                        type="number" 
+                        id="income2" 
+                        name="income2" 
+                        value="<%= formData.income2 %>"
+                        placeholder="Enter income from second source"
+                        step="0.01"
+                        min="0"
+                        required
+                    >
+                    <small class="help-text">e.g., Freelance, investments, business income</small>
+                </div>
+
+                <button type="submit" class="submit-btn">Calculate Total Income</button>
+            </form>
+
+            <div class="info-section">
+                <h3>Important Notes:</h3>
+                <ul>
+                    <li>Enter all income amounts in US dollars</li>
+                    <li>Use decimal points for cents (e.g., 1500.50)</li>
+                    <li>All calculations are performed securely on our servers</li>
+                    <li>Negative values are not allowed</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Tax Income Calculator - For educational purposes only</p>
+        </footer>
+    </div>
+</body>
+</html>
