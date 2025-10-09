@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 350px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 24px;
+  text-align: center;
+}
+.counter {
+  font-size: 3em;
+  margin: 20px 0;
+  color: #45ca36;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+button {
+  flex: 1;
+  font-size: 1.5em;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background: #12ab24;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #1da22f;
+}
+@media (max-width: 500px) {
+  .container {
+    max-width: 95vw;
+    padding: 12px;
+  }
+  .counter {
+    font-size: 2em;
+  }
+  button {
+    font-size: 1em;
+    padding: 10px 0;
+  }
+}
