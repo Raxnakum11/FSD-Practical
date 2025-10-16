@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tuition Admin - Students</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Students</h1>
+      <p><a href="/students/new" class="btn">Add Student</a></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+            <th>Contact</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (students.length === 0) { %>
+            <tr><td colspan="5">No students yet.</td></tr>
+          <% } %>
+          <% students.forEach(function(s) { %>
+            <tr>
+              <td><%= s.name %></td>
+              <td><%= s.age || '' %></td>
+              <td><%= s.course || '' %></td>
+              <td><%= s.email || '' %> <%= s.phone ? ' / ' + s.phone : '' %></td>
+              <td>
+                <a href="/students/<%= s._id %>/edit">Edit</a>
+                <form method="POST" action="/students/<%= s._id %>?_method=DELETE" style="display:inline">
+                  <button type="submit" class="link-btn">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script src="/app.js"></script>
+</html>

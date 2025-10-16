@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tuition Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <h1>Tuition Admin - Students</h1>
+    <form id="studentForm">
+      <input id="id" type="hidden">
+      <input id="name" placeholder="Name" required>
+      <input id="age" placeholder="Age" type="number">
+      <input id="phone" placeholder="Phone">
+      <input id="email" placeholder="Email">
+      <input id="notes" placeholder="Notes">
+      <div class="controls">
+        <button type="submit">Save</button>
+        <button id="resetBtn" type="button">Clear</button>
+      </div>
+    </form>
+
+    <div id="list"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

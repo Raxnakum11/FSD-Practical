@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit Student</h1>
+      <form action="/students/<%= student._id %>?_method=PUT" method="POST" class="form">
+        <label>Name <input name="name" value="<%= student.name %>" required></label>
+        <label>Age <input name="age" type="number" value="<%= student.age %>"></label>
+        <label>Email <input name="email" type="email" value="<%= student.email %>"></label>
+        <label>Phone <input name="phone" value="<%= student.phone %>"></label>
+        <label>Course <input name="course" value="<%= student.course %>"></label>
+        <div class="actions">
+          <button type="submit">Save</button>
+          <a href="/" class="btn">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

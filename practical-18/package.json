@@ -1,0 +1,19 @@
+{
+  "name": "practical-18-notes-api",
+  "version": "1.0.0",
+  "description": "Notes REST API for mobile app - Express + MongoDB",
+  "main": "./bin/www",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
